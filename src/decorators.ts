@@ -49,7 +49,7 @@ function Component(config: ComponentDecorator) {
     template: `
         <div class="card">
             <div class="card-header">
-                Featur
+                Featured
             </div>
             <div class="card-body">
                 <h5 class="card-title">Special title treatment</h5>
