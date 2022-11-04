@@ -39,13 +39,21 @@ interface ComponentDecorator {
 }
 
 function Component(config: ComponentDecorator) {
-    return (Constructor: Function) => {
+    return function <T extends { new(...args: any): object }> (Constructor: T) {
+        return class extends Constructor {
+            constructor(...args: any[]) {
+                super(...args);
 
+                const el = document.querySelector(config.selector)!
+                el.innerHTML = config.template
+                console.log(el)
+            }
+        }
     }
 }
 
 @Component({
-    selector: ".card",
+    selector: "#card",
     template: `
         <div class="card">
             <div class="card-header">
@@ -68,3 +76,5 @@ class CardComponent {
         console.log(`Component Name: ${this.name}`)
     }
 }
+
+const card = new CardComponent("My Card Component")
